@@ -1,0 +1,115 @@
+
+h2 {
+  font-family:华文行楷; /* 指定 h2 的字体 */
+  font-size: 50px;
+}
+
+p {
+  font-family: KAITI, sans-serif; /* 指定 p 的字体 */
+  font-size: 35px;
+}
+
+.container {
+  max-width: 95%;
+  margin: 0 auto;
+  padding: 50px;
+}
+.scenery-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin-top: 90px;
+}
+
+.scenery-list li {
+  margin-bottom: 40px;
+  display: flex; /* 相对定位 */
+  align-items: center;
+  position: relative;
+  /*添加边框*/
+  border: 5px solid #000503;
+  border-radius: 4px;
+  overflow:hidden;
+  box-shadow:0 4px 8px rgba(23, 207, 72, 0.1)
+
+}
+
+.icon {
+  flex: 1; /* 占据 1/8 的位置 */
+  max-width: calc(100% /8);
+  display:flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.icon img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.scenery-info {
+  flex: 4; /* 占据 1/2 的位置 */
+  max-width: calc(100%/2);
+  margin-left: 20px;
+  font-size: 40px;
+}
+
+.scenery-info a {
+  position: absolute;
+  bottom: 0;
+  right: 900px;
+  text-decoration: none;
+  color: rgb(27, 65, 31);
+  font-size: 30px;
+}
+
+.swiper-container {
+  flex: 3; /* 占据 3/8 的位置 */
+  max-width: calc(100% * 3 / 8);
+  position: relative;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  position:absolute;
+  width: 100%;
+  height: auto;
+  opacity:0.8;
+  transition:opacity 0.5s ease;
+  object-fit: cover;
+}
+.scenery-slide-active{
+  opacity: 1;
+}
+.swiper-button-prev,
+.swiper-button-next{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px; /* 箭头宽度 */
+    height: 30px; /* 箭头高度 */
+    background-color: rgba(255, 255, 255, 0.5); /* 箭头背景色 */
+    border-radius: 50%; /* 圆形箭头 */
+    cursor: pointer;
+}
+.swiper-button-prev {
+  left: 10px; /* 左箭头位置 */
+  z-index: 100;
+}
+.swiper-button-next {
+  right: 10px; /* 右箭头位置 */
+  z-index: 100;
+}
+/* 表格配色和设计 */
+.scenery-list li:nth-child(even) {
+  background-color: rgba(186, 202, 192, 0.2); /* 偶数行背景色 */
+}
+
+.scenery-list li:hover {
+  background-color: #f0f0f0; /* 鼠标悬停时的背景色 */
+}
+
+.scenery-list li{
+  margin:0;
+  padding:0;
+}

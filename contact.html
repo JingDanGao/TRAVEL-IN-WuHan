@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武汉旅游地图</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+````<style>
+  /* 新增父容器样式 */
+  .blocks-container {
+            margin-top: 10px; /* 与轮播器的下边界对齐 */
+            padding: 20px;
+        }
+        /* 新增板块样式 */
+        .block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            position: relative; /* 相对定位 */
+            z-index: 0; /* 使板块位于轮播器下方 */
+            border: 4px dashed rgb(10, 43, 17);
+        }
+
+        .block img {
+            width: 30%; /* 图片宽度占据 block 宽度的一半 */
+            height: 60%; /* 高度自适应，保持原始宽高比 */
+            justify-content: center;
+            /*border: 2px solid #ccc; /* 添加2像素宽度的灰色实线边框 */
+            border-radius: 10px; /* 添加圆角 */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+        }
+        .block img:hover {
+        transform: scale(1.02); /* 放大 5% */
+        }
+        .block .text {
+            width: 50%;
+            padding: 0 20px;
+        }
+
+        .block h2 {
+            font-family: 华文行楷;
+            font-size: 50px;
+            text-align: center;
+            font-weight: bolder;
+            color: rgb(23, 45, 19);
+            font-style:oblique;
+        }
+        .block p {
+            text-align: justify;
+            font-family: KAITI;
+            font-size: 40px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+        }
+</style>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="nav-toggle">
+        <div class="logo"><strong><font color="black">/ </font><font color="red">To</font><font color="black"> WuHan 悦游武汉 /</font></strong></div>
+        <ul class="links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="about.html">关于武汉</a></li>
+          <li><a href="travelmap.html">旅游指引</a></li>
+          <li><a href="scenery.html">景区详解</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+        </ul>
+        <label for="navrgba(92, 192, 119, 0.1)burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </label>
+      </nav>
+      
+      <label for="nav-toggle" class="icon-burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </label>
+      <div style="text-align: center; margin-top: 50px;">
+        <p style="font-size: 100px;font-family:'Times New Roman', Times, serif;">
+          <font color="black">☎️</font><font color="rgb(23, 45, 19)">Contact  </font><font color="black">us☎️</font> 
+        </p>
+    </div>
+      <div class="blocks-container">
+        <!-- 第一个板块 -->
+        <div class="block">
+            <img src="contact1.png" alt="Image 1">
+            <div class="text">
+                <h2>🌈🌈团队介绍🌈🌈</h2>
+                <p>
+                  --当地理学科的学生们汇聚在一起，我们的团队追求着对武汉这座城市的深度探索和全面展示。<br>
+                  --我们的成员来自不同的背景，但都怀着对地理信息科学的热爱和对武汉这座城市的热情。<br>
+                  --我们致力于利用我们的专业知识和技能，打造一个全方位的武汉旅游地图网站，为游客提供详尽的旅游指南和景点介绍。<br>
+                  --通过团队合作和不懈努力，我们努力确保网站内容的准确性和可靠性，为游客们带来一次愉快而难忘的武汉之旅。
+                </p>
+            </div>
+        </div>
+    
+        <!-- 第二个板块 -->
+        <div class="block">
+            <div class="text">
+                <h2>🌈🌈联系方式🌈🌈</h2>
+                <p>
+                  欢迎您联系我们！作为制作武汉旅游地图的学生团队，我们清晰我们仍然存在问题与不足。我们非常重视游客的建议和意见。您的反馈对我们改进和完善服务至关重要。<br>
+                  无论是对于网站的功能、内容还是对于武汉旅游的建议，我们都希望能听到您的声音。请随时通过以下方式与我们联系：<br>
+
+                  📧电子邮件：您可以发送邮件至我们的邮箱 [example@example.com]，我们将尽快回复您的来信。<br>
+              
+                  🧚🏻‍♀️再次感谢您选择该地图，期待听到您宝贵的意见和建议！
+                </p>
+            </div>
+            <img src="contact01.png" alt="Image 2">
+        </div>
+    
+        <!-- 第三个板块
+        <div class="block">
+            <img src="about8.png" alt="Image 3">
+            <div class="text">
+                <h2>✨✨✨✨</h2>
+                <p>
+
+                    </p>
+            </div>
+        </div>
+      -->
+    </div>
+
+
+
+</body>
+</html>   
+
+    
+  

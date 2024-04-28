@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武汉旅游地图</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+        /* 添加自定义样式 */
+        .swiper-container {
+            width: 100%; /* 宽度撑满整个页面 */
+            height: 600px; /* 控制高度 */
+            position:relative; /* 固定在页面顶部 */
+            top: 0; /* 距离页面顶部的距离 */
+            left: 0; /* 距离页面左侧的距离 */
+            z-index: 1; /* 确保位于其他内容的上方 */
+        }
+        .swiper-slide img {
+            width: 100%; /* 图片宽度撑满轮播容器 */
+            height: 100%; /* 图片高度撑满轮播容器 */
+            object-fit: cover; /* 图片填充整个容器 */
+        }
+         /* 新增父容器样式 */
+         .blocks-container {
+            margin-top: 10px; /* 与轮播器的下边界对齐 */
+            padding: 20px;
+        }
+        /* 新增板块样式 */
+        .block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            position: relative; /* 相对定位 */
+            z-index: 0; /* 使板块位于轮播器下方 */
+        }
+
+        .block img {
+            width: 50%; /* 图片宽度占据 block 宽度的一半 */
+            height: auto; /* 高度自适应，保持原始宽高比 */
+            border: 2px solid #ccc; /* 添加2像素宽度的灰色实线边框 */
+            border-radius: 10px; /* 添加圆角 */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+            transition: transform 0.3s ease; /* 添加过渡效果 */
+        }
+        .block img:hover {
+        transform: scale(1.02); /* 放大 5% */
+        }
+        .block .text {
+            width: 50%;
+            padding: 0 20px;
+        }
+
+        .block h2 {
+            font-family: 华文行楷;
+            font-size: 50px;
+            text-align: center;
+            font-weight: bolder;
+            color: rgb(23, 45, 19);
+            font-style:oblique;
+        }
+        .block p {
+            text-align: justify;
+            font-family: KAITI;
+            font-size: 40px;
+            font-weight: bold;
+            color: rgb(0, 0, 0);
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="nav-toggle">
+        <div class="logo"><strong><font color="black">/ </font><font color="red">To</font><font color="black"> WuHan 悦游武汉 /</font></strong></div>
+        <ul class="links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="about.html">关于武汉</a></li>
+          <li><a href="travelmap.html">旅游指引</a></li>
+          <li><a href="scenery.html">景区详解</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </label>
+      </nav>
+      
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="a1.png" alt="Image 1"></div>
+            <div class="swiper-slide"><img src="a2.png" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="a3.png" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="a4.png" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="a5.png" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="a6.png" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="a7.png" alt="Image 2"></div>
+            <div class="swiper-slide"><img src="a8.png" alt="Image 2"></div>
+            <!-- 添加更多的轮播图片 -->
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+        <div style="text-align: center; margin-top: 50px;">
+            
+            <p style="font-size: 100px;font-family:华文行楷;">
+                📜湖光山色映江城，荆楚风流通九省📜
+            </p>
+            
+        </div>
+
+<!--父容器包裹-->
+    <div class="blocks-container">
+    <!-- 第一个板块 -->
+    <div class="block">
+        <img src="about01.jpg" alt="Image 1">
+        <div class="text">
+            <h2>✨✨历史悠久的文化名城✨✨</h2>
+            <p>武汉市是国家历史文化名城、楚文化的重要发祥地。武汉犹如一部活生生的历史长卷，承载着丰富的文化底蕴和独特的建筑风格，见证了许多历史事件的发生和文化的繁荣。
+                早在公元前3500年左右的新石器时代，这片土地上已有先民繁衍生息；春秋战国以来，一直是中国南方的军事和商业重镇；
+                三国时期，孙权在此筑城，定名为“夏口”，开启了武汉作为军事重镇的历史篇章；
+                元代成为湖广行省省治；明清两代，汉口因商业贸易兴盛，与北京、南京、苏州并称“天下四大名镇”，
+                被誉为“楚中第一繁盛处”和“天下四聚”之一，同时清末汉口开埠和洋务运动开启武汉现代化进程，
+                使其成为近代中国重要的经济中心；近代，武昌起义的枪声在这里响起，拉开了辛交革命的序幕，武汉因此被誉为“首义之城”。</p>
+        </div>
+    </div>
+
+    <!-- 第二个板块 -->
+    <div class="block">
+        <div class="text">
+            <h2>✨✨璀璨夺目的国之瑰宝✨✨</h2>
+            <p>武汉文化底蕴深厚，楚文化、荆楚艺术、汉派文化等多元文化交融共生。
+                黄鹤楼、古琴台、归元寺等名胜古迹承载着古老的故事与传说，吸引着无数游人探寻。
+                武汉大学的樱花大道、湖北省博物馆的越王勾践刀、融合东西方建筑风格的江汉关，
+                都是这座城市文化符号的生动体现，无不彰显着这座城市的生活情趣与人文魅力。
+                武汉被誉为"美食之都"，以其独特的美食文化而闻名,拥有丰富多样的当地特色美食。
+                最具代表性的当属热干面，热干面口感独特，汤汁浓郁，是武汉人民早餐的首选。
+                除了热干面，武汉还有豆皮、鸭脖、莲藕炖排骨等特色小吃，每一道都让人垂涎欲滴。
+                品尝当地美食，是探索武汉文化的重要一环。
+            </p>
+        </div>
+        <img src="about02.jpg" alt="Image 2">
+    </div>
+
+    <!-- 第三个板块 -->
+    <div class="block">
+        <img src="about8.png" alt="Image 3">
+        <div class="text">
+            <h2>✨✨多江多湖的绿色家园✨✨</h2>
+            <p>武汉地势为东高西低，南高北低，中间被长江、汉江呈Y字型切割成三块。
+                武汉城区南部分布有近东西走向的条带状丘陵，四周分布有比较密集的树枝状冲沟，
+                境内大小近百个湖泊星罗棋布，形成了水系发育、山水交融的复杂地形。最高点高程150米左右，
+                最低陆地高程约18米。武汉属亚热带季风性湿润气候区，雨量充沛、日照充足、四季分明，夏高温、降水集中，冬季稍凉湿润。
+                武汉江河纵横、湖港交织，是中国著名的江城，中国第一大河长江及其最大支流汉江在城中交汇，
+                接纳南北支流入汇，形成武昌、汉口、汉阳三镇鼎立的壮美景观。
+                众多大小湖泊镶嵌在大江两侧，因此，武汉也被誉为“百湖之市”，拥有全国最大的城中湖——东湖和众多湖泊，
+                城市水域面积占总面积的四分之一。
+                </p>
+        </div>
+    </div>
+</div>
+      <label for="nav-toggle" class="icon-burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </label>
+
+
+
+       <!-- 引入Swiper的JavaScript文件 -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // 初始化Swiper
+        var swiper = new Swiper('.swiper-container', {
+            // 设置为轮播模式
+            loop: true,
+            // 分页器
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            // 导航按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            autoplay: {
+            delay: 2000, // 图片之间切换的延迟时间，单位为毫秒
+            disableOnInteraction: false, // 用户操作swiper后是否停止自动播放，默认为true（停止自动播放）
+            },
+        });
+    </script>
+</body>
+</html>   

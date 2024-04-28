@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武汉旅游地图</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    
+    <style>
+      body {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          height: 100%;
+          font-family: KAITI,sans-serif;
+      }
+
+      video {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
+      
+    
+  </style>
+</head>
+
+<body>
+
+      <nav>
+        <input type="checkbox" id="nav-toggle">
+        <div class="logo"><strong><font color="black">/ </font><font color="red">To</font><font color="black"> WuHan 悦游武汉 /</font></strong></div>
+        <ul class="links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="about.html">关于武汉</a></li>
+          <li><a href="travelmap.html">旅游指引</a></li>
+          <li><a href="scenery.html">景区详解</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </label>
+      </nav>
+      
+      <table cellspacing="0" style="width: 100%;">
+        <tr style="height: 120px;text-align: center;background:#FCFCFC">
+            <td colspan="4" style="font-size: 1.5em;font-weight: bold;">
+              <video id="video" autoplay muted>
+                <source src="首页vedio.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            </td>
+        </tr> 
+      </table>
+     <!--网页功能介绍-->
+     <div id= “introduce“ class="container">
+      <div class="table" onclick="window.location.href='about.html'">
+          <div>
+            <h3 style="font-family: KAITI,sans-serif;font-size: 46px;text-align: center; font-weight: bold;">————关于武汉————</h3>
+          </div>
+          <img src="index_about.png" alt="Image 1">
+          <div class="overlay">
+              <p>武汉，坐落于中国中部，是一座充满活力和历史底蕴的现代化城市。心动不如行动，点击了解详情吧。</p>
+          </div>
+      </div>
+      <div class="table" onclick="window.location.href='travelmap.html'">
+        <div>
+          <h3 style="font-family: KAITI,sans-serif;font-size: 46px;text-align: center; font-weight: bold;">————旅游指引————</h3>
+        </div>
+          <img src="index_travel.png" alt="Image 2">
+          <div class="overlay">
+              <p>点击获取旅游功能性地图并获得公共交通基本情况</p>
+          </div>
+      </div>
+      <div class="table" onclick="window.location.href='scenery.html'">
+        <div>
+           <h3 style="font-family: KAITI,sans-serif;font-size: 46px;text-align: center; font-weight: bold;">————景区详解————</h3>
+        </div>
+          <img src="index_scenery.png" alt="Image 3">
+          <div class="overlay">
+              <p>点击了解武汉主要景区的相关情况，包括门票、交通方式等。</p>
+          </div>
+      </div>
+      <div class="table" onclick="window.location.href='contact.html'">
+        <div>
+           <h3 style="font-family: KAITI,sans-serif;font-size: 46px;text-align: center; font-weight: bold;">————联系我们————</h3>
+        </div>
+          <img src="index_contact.png" alt="Image 4">
+          <div class="overlay">
+              <p>欢迎大家联系我们，提出建议和意见，我们会认真阅读并修改</p>
+          </div>
+      </div>
+  </div>
+
+      <!-- 热门推荐 -->		
+<div id="destinations" class="container">
+  <h1 class="tit-line">热门推荐</h1>
+  <ul>
+  <li class="first"><a href="http://www.cnhhl.com/index.php?m=History&a=index&id=71" target="_blank"><img src="黄鹤楼1.jpg"><span></span><em>黄鹤楼</em></a></li> 
+  <li><a href="https://www.whu.edu.cn/?c=0" target="_blank"><img src="武汉大学1.jpg"><span></span><em>武汉大学</em></a></li>         
+  <li><a href="https://wh.happyvalley.cn/" target="_blank"><img src="欢乐谷1.jpg"><span></span><em>欢乐谷</em></a></li>          
+  <li><a href="https://www.hbww.org.cn/home/index.html" target="_blank"><img src="湖北省博物馆1.jpg"><span></span><em>湖北省博物馆</em></a></li>          
+  <li><a href="https://wh.bendibao.com/tour/2020511/111273.shtm" target="_blank"><img src="花博会1.jpg"><span></span><em>武汉花博汇</em></a></li>          
+  <li><a href="http://www.mulanlake.com/" target="_blank"><img src="木兰1.jpg"><span></span><em>黄陂木兰文化生态旅游区</em></a></li>          
+  <li><a href="https://1911museum.cn/" target="_blank"><img src="武昌纪念馆1.jpg"><span></span><em>辛亥革命武昌起义纪念馆</em></a></li>          
+  <li><a href="http://www.wniecm.com/" target="_blank"><img src="国际博览中心.jpg"><span></span><em>国际博览中心</em></a></li>          
+  <li><a href="https://www.donghulvdao.com/" target="_blank"><img src="东湖樱花园1.jpg"><span></span><em>东湖樱花园</em></a></li>          
+  </ul>
+  <div class="clear"></div>
+  </div>
+  
+  
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var video = document.getElementById('video');
+
+            function isElementInViewport(el) {
+                var rect = el.getBoundingClientRect();
+                return (
+                    rect.top >= 0 &&
+                    rect.left >= 0 &&
+                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            function checkVideoVisibility() {
+                if (isElementInViewport(video)) {
+                    video.play();
+                    document.removeEventListener('scroll', checkVideoVisibility);
+                }
+            }
+
+            document.addEventListener('scroll', checkVideoVisibility);
+            checkVideoVisibility();
+
+        });
+    </script>
+    
+    <label for="nav-toggle" class="icon-burger">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </label>
+
+</body>
+</html>   
+
+    
+  

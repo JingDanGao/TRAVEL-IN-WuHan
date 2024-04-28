@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>武汉旅游地图</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <style>
+      #map-container {
+    width: 100vw; /* 视口宽度的100% */
+    height: 65vw; /* 宽度的131%，保持图像的宽高比 */
+    position: relative;
+    background-image: url('武汉地图_meihua.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: auto;
+  }
+  .marker {
+    position: absolute;
+    width: var(--marker-size, 20px); /* 可以通过style属性来自定义 */
+    height: var(--marker-size, 20px); /* 可以通过style属性来自定义 */
+    background-color: transparent; /* 透明背景使其隐形 */
+    border: none; /* 无边框 */
+    border-radius: 50%; /* 圆形标记 */
+    z-index: 1000; /* 确保标记在其他元素之上 */
+    cursor: pointer; /* 鼠标悬停时指针样式 */
+    transform: translate(-50%, -50%); /* 确保标记的中心对准给定坐标 */
+}
+
+  #info-box {
+    display: none;
+    position: absolute;
+    width: 1000px;
+    background: rgb(226, 225, 222);
+    border: 3px dashed black;
+    padding: 10px;
+    z-index: 1000;
+    opacity: 0;  /* 初始透明度设置为0 */
+    transform: translateY(-20px); /* 初始向上位移20px */
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out; /* 添加动画效果 */
+    font-size: 30px;
+    font-family: KAITI;
+  }
+  #route {
+  text-align: center; /* 让文本居中对齐 */
+}
+
+  #route p {
+  font-size: 50px;
+  font-family: KAITI;
+  font-weight: bolder;
+  margin: 0; /* 去除段落的默认外边距 */
+}
+
+#route img {
+  display: block; /* 将图片转换为块级元素 */
+  margin: 0 auto; /* 水平居中 */
+  width: 1500px;
+}
+    </style>
+</head>
+
+<body>
+    <nav>
+        <input type="checkbox" id="nav-toggle">
+        <div class="logo"><strong><font color="black">/ </font><font color="red">To</font><font color="black"> WuHan 悦游武汉 /</font></strong></div>
+        <ul class="links">
+          <li><a href="index.html">首页</a></li>
+          <li><a href="about.html">关于武汉</a></li>
+          <li><a href="travelmap.html">旅游指引</a></li>
+          <li><a href="scenery.html">景区详解</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+        </ul>
+        <label for="nav-toggle" class="icon-burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </label>
+      </nav>
+      
+      <label for="nav-toggle" class="icon-burger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </label>
+
+
+      <div id="map-container" style="position: relative;">
+      </div>
+      <div id="info-box"></div> 
+      <div id="route">
+        <p style="font-size: 50px;font-family: KAITI;align-items: center;font-weight: bolder;">--🚇武汉地铁🚇-- </p>
+        <img src="地铁.gif">
+      </div>
+
+      <script>
+      window.onload = function() {
+        const mapContainer = document.getElementById('map-container');
+        const spots = [
+          { name: "东湖樱花园",size:"40px", 
+          description: "⏰ 开放时间：园区时间；开车/开车：导航东湖樱花园南门（磨山景区停车场）地铁/公交：地铁2号线到光谷大道站/光谷广场站，然后再前往樱花园；公交401、402、413、682路直达鲁磨路磨山站走5分钟就到了。从梨园地铁站进，乘坐游船/观光车到樱花园。✅ 预约方式：门票60r/人次，门口二维码扫描买票直接进，不需要网上预约。✨ 穿颜色鲜艳衣服最适合和花花拍照！。", 
+          imageUrl: "东湖樱花园3.jpg", x: 0.5051, y: 0.5401 },//这里用的是百分比坐标来确定点击位置
+          { name: "古德寺", size:"40px",
+          description: "独特的建筑风格，东西交融，穿越时空的神秘画卷，探寻建筑之美。⏰  开放时间：夏季：8:00-16:50,16:30停止入寺.冬季：8:30-16:30, 16:00停止入寺.门票：免费.公共交通：公交“黄浦大街工农兵路”站，步行约500米;地铁三号线罗家庄站B口下，后需步行15-20分钟;【拍照游玩Tips】1.人比较多，某些地方要排队拍照，请注意素质。建议早上开门就进去或者下午关门之前进去，拍照的人会少一点。2.请勿穿超短裙、吊带装等暴露服装3.殿堂内禁止拍照，注意不要采摘花叶，不得损坏文物4.禁止吸烟，高声喧哗，打闹嬉戏5.不要给佛祖拍照！许愿灵了记得一年内来还愿！", 
+          imageUrl: "古德寺1.jpg", x: 0.4659, y: 0.4941 },//通过4.0版本获取坐标时，坐标表示的是鼠标尖尖指的点
+          { name: "光谷广场",size:"40px", 
+          description: "光谷广场，武汉的科技动脉，商业的繁荣地标，踏着创新的节奏，感受着武汉的活力与激情;交通：公交超多，地铁2号线光谷广场/珞雄路两个站直达。⏰ 营业时间：全天开放。✨ 逛街推荐: 世界城广场、悦心汇地下步行街、大洋百货、音乐喷泉、莫多大教堂、现代风情街、西班牙风情街、意大利风情街、德国风情街", 
+          imageUrl: "光谷广场1.jpg", x: 0.5200, y: 0.5875 },
+          { name: "青山公园", size:"45px",
+          description: "绿意盎然，古韵悠长，来青山公园，开启一段美妙的休闲时光！<br>门票：免费<br>✅ 公共交通：<br>自驾直接导航到青山公园，或地铁5号线到红钢城站A出口<br>✨ 推荐√占地面积大，植被茂盛，直接是天然大氧吧√人流量不大烟火气很足，亭台楼榭，小桥流水，适合遛弯、带娃√玉兰、樱花、梨花、绣球，带上野餐垫，约几个好友，可以在里面呆一天",
+          imageUrl: "青山公园1.jpg", x: 0.5126, y: 0.4797 },
+          { name: "武汉花博会", size:"60px",
+          description: "武汉花博汇，集花卉展览、园艺观赏、休闲娱乐为一体。<br>⏰ 最佳赏花时间：每年3-5月和9-11月，花卉种类繁多，景色宜人~<br>✅ 预约方式：提前一天美团买门票（日场55r）<br>✨ 旅游拍照路线:8点半开园-入园门口处拍大景-婚礼殿堂的山坡拍大景-玫瑰园拍近景-露营，拍草地照-拍摩天轮照片-吃晚饭-看晚上8点的烟花。<br>✨ 推荐景点：花神广场、蜗牛城堡、花食街、四季花海、弗洛伊鲜花小镇、婚礼教堂、钟楼艺术馆、帐篷营地、马鞭草花海、戛纳沙滩、白色婚庆长廊、伯牙桥、子期桥、知音桥…", 
+          imageUrl: "花博会1.jpg", x: 0.3809, y: 0.5774 },
+          { name: "欢乐谷", size:"20px",
+          description: "旋转、翻滚、飞跃，瞬间置身于奇妙的童话世界！<br>⏰ 开放时间：9：00-22:00<br>公共交通：地铁到岳家嘴B出口再转公交782或566路<br>✅ 预约方式：网上预约，成人票200r，大学生票130r，儿童票130r，老人票140r，可以在湖北文旅公众号抢免费门票！<br>✨ 推荐：飞越长江、天地双雄、激流勇进（需穿雨衣＋鞋套）、木翼双龙、东湖塔、极速飞车、星际奇航矿山车。", 
+          imageUrl: "欢乐谷1.jpg", x: 0.4985, y: 0.5056 },
+          { name: "黄鹤楼", size:"55px",
+          description: "蛇山之巅，黄鹤楼巍峨矗立，传颂千古传奇。<br>⏰ 开放时间：8：30-18：00（17：20停止入场）；19：30-22：00（21：30停止入场）<br>✨公共交通：地铁5号线:司门口黄鹤楼地铁站C出口（红墙打卡点）司门口黄河口A出口，步行15分钟（西门）;彭刘杨地铁站A出口，步行11分钟（南门）<br>✅ 预约方式：白天70/夜晚120/编钟乐舞50，需提前预约，凭预约证件或扫码进入。", 
+          imageUrl: "黄鹤楼1.jpg", x: 0.4752, y: 0.5386 },
+          { name: "黄陂木兰文化生态旅游区", size:"55px",
+          description: "✅ 预约方式：木兰草原，成人票65元/人（不含娱乐项目设施费用），大余湾成人票50元/人（武汉文旅码小程序价格）<br>木兰山因木兰将军而得名，是木兰将军的故里，佛道两教圣地。这里的山、水、花、木、宫、殿、阁，几乎都和千古流芳的木兰将军息息相关。<br>✨ 由木兰山、木兰天池、木兰草原、木兰云雾山四大景区组成。<br>想看山，这里有国家地质公园、千年宗教名胜木兰山；想看森林，这里有幽谷美景、浪漫山水的国家森林公园木兰天池；想看草原，这里有华中唯一的草原风情景区木兰草原；想看花，木兰云雾山里有万亩杜鹃，木兰清凉寨景区有10万株野生樱花。", 
+          imageUrl: "木兰1.jpg", x: 0.4894, y: 0.2194 },
+
+          { name: "盘龙城国家考古遗址公园", size:"55px",
+          description: "盘龙城国家考古遗址公园，还原真实生动的古历史现场。<br>⏰ 开放时间：周二至周日 09:00-17:00( 16:00停止入园入馆)，周一闭馆<br>✅ 预约方式：免费，提前预约即可<br>公共交通：地铁2号线直达盘龙城站D口，出站步行700米即达。<br>‼️【拍照游玩Tips】1、博物院的外墙很特别，很有古埃及的神秘感，随手一拍就出片。2、博物院门前的大草坪，适合野餐，拍照也很绝。3、进门左边的楼梯处，若是遇上蓝天白云，仿佛动漫场景一般。", 
+          imageUrl: "盘龙城1.jpg", x: 0.4556, y: 0.4625 },
+          { name: "湖北省博物馆", size:"55px",
+          description: "湖北省博物馆，楚辞风貌、荆楚文明交织呈现，领略华夏文明的深邃魅力。<br>⏰ 开放时间：9:00-17:00（周一闭馆，法定节假日除外，一般16:30左右就开始清场）<br>公共交通：地铁8号线省博湖北日报站A出口，步行至南门。<br>✅ 预约方式：提前七天预约，每天0点放票，门票免费，刷身份证入场<br>编钟表演预约：需单独预约，当天早上七点在WX小程序或者ZFB二维码上预约，或者现场机器上购买，特惠票需人工窗口现场买，50r/人，优惠票30r/人。<br>✨ 推荐：越王勾践剑展厅→曾侯乙展厅→梁庄王展厅，必看！曾侯乙编钟，越王勾践剑，郧县人头骨化石，元青花四爱图梅瓶，虎座鸟架鼓，彩绘人物车马出行图…", 
+          imageUrl: "湖北省博物馆1.jpg", x: 0.4883, y: 0.5329 },
+          { name: "辛亥革命武昌起义纪念馆", size:"55px",
+          description: "循着先辈的足迹，新青年来到这里，我们的灵魂被吸引，向我们的先辈致敬。<br>🌈预约用小程序<武汉文旅码>，免费参观，南区和北区分开预约；每周二至周日开放，周一闭馆，9:00-17：00（最迟16:30入馆)<br>🌈乘车路线：乘坐武汉地铁2号线，在螃蟹岬站下车，转乘公交578路、573路、43路、609路等到阅马场站下车，步行即可到达",
+          imageUrl: "武昌纪念馆1.jpg", x: 0.4696, y: 0.5573 },
+          { name: "武汉大学", size:"55px",
+          description: "⏰  开放时间：8:00-18:00<✅  预约方式：微信公众号“武汉大学”，左下角点开“预约进校”，当天预约点“线下预约”，提前预约点“线上预约”<br>公共交通：地铁2号线街道口站C出口步行300米/地铁8号线小洪山站A出口步行800米<br>✨ 路线推荐：珞珈门-武汉大学牌坊-樱花大道-宋卿体育馆-樱花城堡-行政楼-文澜门-凌波门栈桥", 
+          imageUrl: "武汉大学2.jpg", x: 0.4883, y: 0.5544 },
+          { name: "武汉国际博览中心", size:"55px",
+          description: "武汉国际博览中心，以展览、展示为主导功能，集会展、科技、文化、商务、休闲、旅游、居住于一体的多功能复合型的国际博览城。武汉航天展、武汉咖啡展、音乐节……各类展览应有尽有！<br>✅ 地铁6号线到国博中心北下。", 
+          imageUrl: "国际博览中心.jpg", x: 0.4323, y: 0.5774 },
+          { name: "藏龙岛湿地公园", size:"55px",
+          description: "武汉之肺，生态之源，绿色与生命同行，感受大自然的神奇魅力。<br>✅ 交通：自驾//乘坐758路公交到栗庙路美院藏龙岛校区站//2号线藏龙东街站C出口转公交380路到栗庙路美院藏龙岛校区站//地铁2号线佛祖岭站A出口，出来直来往前走一小段是公交站<br>✨ 这里适合骑行游玩，可以露营野餐，公园面积约401公顷，包括杨桥湖、上潭湖、下潭湖、玉叶滩、明星林场等区域，有“藏龙八景”“杨桥湖二十四桥”等景观<br>√整条绿道依山临湖√黄澄澄银杏树叶√绿野仙踪的氛围感", 
+          imageUrl: "藏龙岛2.jpg", x: 0.5023, y: 0.6435 },
+          { name: "龙泉山风景区", size:"55px",
+          description: "有山有水，有历史有文化，这就是龙泉山！<br>交通指南：乘坐地铁到光谷广场站，再转乘公交车到龙泉山站。//也可乘坐公交车到光谷广场站，再转乘公交车到龙泉山站。//从武汉市区打车前往龙泉山，车程约1小时。<br>✨ 推荐景点<br>楚天台：龙泉山的标志性建筑，高 35 米，共 3 层，登顶可俯瞰梁子湖美景。<br>楚昭王墓：墓主人是明朝开国皇帝朱元璋的第六子，被封为楚王，楚昭王死后，葬于江夏龙泉山。<br>✨ 推荐美食：龙泉山鸡汤、龙泉山烤鱼、龙泉山野菜。", 
+          imageUrl: "龙泉山1.jpg", x: 0.5443, y: 0.6147 },
+          { name: "江夏灵山生态文化旅游区", size:"55px",
+          description: "江夏灵山生态文化旅游区,山水之间畅游，尽情享受大自然的恩赐。<br>⏰ 开放时间：9:00-17:30（16:30停止进去）<br>门票：35r/人，停车：10r<br>交通：地铁：7号线青龙山小镇C口，转公交209抵达//自驾：从市区出发，1个小时左右，方便很多，景区有停车场;电瓶摆渡车：15r/人（自愿乘坐）<br>备齐物资,可随意搭帐篷露营~(¯▽¯~)", 
+          imageUrl: "灵山3.jpg", x: 0.4911, y: 0.7067 },
+
+          //景点数据，有部分景点还未写，size是为了设置标记的尺寸
+        ];
+      
+        spots.forEach(spot => {
+          const marker = document.createElement('div');
+          marker.classList.add('marker');
+          
+          // 每个spot对象中都有一个size属性
+          marker.style.setProperty('--marker-size', spot.size);//自定义了
+      });
+      
+      
+        function placeMarkers() {
+        //接下来这部分是跟随定位（页面缩放）自动调整标记坐标
+          // 清除旧标记
+          mapContainer.innerHTML = '';
+          // 获取容器的尺寸
+          const containerWidth = mapContainer.offsetWidth;
+          const containerHeight = mapContainer.offsetHeight;
+      
+          // 创建新标记
+          spots.forEach(spot => {
+            const marker = document.createElement('div');
+            marker.classList.add('marker');
+            // 计算标记的位置基于容器的尺寸
+            marker.style.left = `${containerWidth * spot.x}px`;
+            marker.style.top = `${containerHeight * spot.y}px`;
+            mapContainer.appendChild(marker);
+      
+      
+      
+      //这部分是交互功能，点击显示信息框
+            // 添加事件监听器，byclick显示信息框
+            marker.onclick = function() {
+              const infoBox = document.getElementById('info-box');
+              infoBox.style.display = 'block';
+              infoBox.style.left = `${parseFloat(marker.style.left) + 20}px`; // 小偏移确保不被marker遮挡
+              infoBox.style.top = marker.style.top;
+              infoBox.innerHTML = `<strong>${spot.name}</strong><p>${spot.description}</p><img src="${spot.imageUrl}" alt="${spot.name}" style="width: 100%;">`;
+              //平滑显示动画
+              if (!event.target.classList.contains('marker')) {
+              infoBox.style.display = 'none';
+              }
+              infoBox.style.display = 'block';
+        setTimeout(() => {
+            infoBox.style.opacity = 1;
+            infoBox.style.transform = 'translateY(0)';
+          }, 10);
+          
+          // 强制重新计算样式，以便重置动画（多个标记，所以要重置，多次动画）
+          infoBox.style.display = 'none'; // 首先隐藏信息框，触发重绘
+          void infoBox.offsetWidth; // CSS重新计算
+      
+          // 设置显示并应用动画
+          infoBox.style.opacity = 0;
+          infoBox.style.transform = 'translateY(-20px)';
+          infoBox.style.display = 'block';
+          setTimeout(() => {
+              infoBox.style.opacity = 1;
+              infoBox.style.transform = 'translateY(0)';
+          }, 10);
+      
+          infoBox.style.left = `${parseFloat(marker.style.left) + 20}px`;
+          infoBox.style.top = marker.style.top;
+          infoBox.innerHTML = `<strong>${spot.name}</strong><p>${spot.description}</p><img src="${spot.imageUrl}" alt="${spot.name}" style="width: 100%;">`;
+      
+            };
+          });
+        }
+      
+      
+        placeMarkers();
+      //这一部分也是标记的跟随放置
+        // 监听窗口大小变化并重新放置标记
+        window.addEventListener('resize', placeMarkers);
+      };
+      
+      
+      //点击其他位置，信息框关闭
+          document.addEventListener('DOMContentLoaded', function() {
+              var infoBox = document.getElementById('info-box');
+              document.addEventListener('click', function(event) {
+                  if (!infoBox.contains(event.target)) {
+                      infoBox.style.display = 'none';
+                  }
+              }, true); 
+      //下面是平滑关闭特效
+              infoBox.style.opacity = 0;
+              infoBox.style.transform = 'translateY(-20px)';
+        setTimeout(() => {
+            infoBox.style.display = 'none';
+        }, 500);
+      
+          });
+      
+      
+      
+      </script>
+          
+          
+</body>
+</html>   
+
+    
+  

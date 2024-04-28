@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Interactive Map with Markers</title>
+<style>
+  #map-container {
+    width: 100vw; /* 视口宽度的80% */
+    height: 65vw; /* 宽度的131%，保持图像的宽高比 */
+    position: relative;
+    background-image: url('武汉地图_mask.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin: auto;
+  }/*定位到容器，而不是网页和图片*/
+  .marker {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 50%;
+    z-index: 1000; /* 确保标记在最上层 */
+  }
+  #info-box {
+    display: none;
+    position: absolute;
+    width: 200px;
+    background: white;
+    border: 1px solid black;
+    padding: 10px;
+    z-index: 1000;
+  }
+</style>
+</head>
+
+
+<!--本文档目前的一些问题，标记我采用的是大圆点（后面可以隐藏，但是前期为了调试和点击方便，先留着了）
+然后3.0版本是网页坐标定位，4.0版本是容器定位（4.0理论上是不受网页缩放的影响，你等下调试可以直接看圆点的位置应该是随着缩放改变的，如果不对我再改）
+-->
+
+
+
+<body>
+
+<div id="map-container" style="position: relative;">
+  <!-- Markers will be added here dynamically -->
+</div>
+<div id="info-box"></div>
+
+<script>
+
+
+window.onload = function() {
+  const mapContainer = document.getElementById('map-container');
+  const spots = [
+    { name: "东湖樱花园", description: "这里是东湖樱花园的介绍。", imageUrl: "东湖樱花园.jpg", x: 0.52, y: 0.52 },//这里用的是百分比坐标来确定点击位置，目前坐标还是瞎填的
+    { name: "古德寺", description: "这里是古德寺的介绍。", imageUrl: "古德寺.jpg", x: 0.36, y: 0.70 },
+    { name: "光谷广场", description: "这里是光谷广场的介绍。", imageUrl: "光谷广场.jpg", x: 0.436, y: 0.767 },
+    // 更多景点
+    // ... 景点数据
+  ];
+
+  // 监听容器点击事件
+  mapContainer.addEventListener('click', function(event) {
+    const containerRect = mapContainer.getBoundingClientRect();
+    const x = event.clientX - containerRect.left;
+    const y = event.clientY - containerRect.top;
+    const xPercent = (x / containerRect.width) * 100;
+    const yPercent = (y / containerRect.height) * 100;
+
+    // 使用alert代替console.log来显示百分比坐标
+    alert(`Clicked at: ${xPercent.toFixed(2)}%, ${yPercent.toFixed(2)}%`);
+  });
+
+  function placeMarkers() {
+     // 清除旧标记
+     mapContainer.innerHTML = '';
+    // 获取容器的尺寸
+    const containerWidth = mapContainer.offsetWidth;
+    const containerHeight = mapContainer.offsetHeight;
+
+    // 创建新标记
+    spots.forEach(spot => {
+      const marker = document.createElement('div');
+      marker.classList.add('marker');
+      // 计算标记的位置基于容器的尺寸
+      marker.style.left = `${containerWidth * spot.x}px`;
+      marker.style.top = `${containerHeight * spot.y}px`;
+      mapContainer.appendChild(marker);
+
+      // 添加事件监听器，也就是发现图片缩放了，那么坐标跟着变换
+      marker.onclick = function() {
+        const infoBox = document.getElementById('info-box');
+        infoBox.style.display = 'block';
+        infoBox.style.left = `${parseFloat(marker.style.left)}px`; // 小偏移确保不被marker遮挡
+        infoBox.style.top = marker.style.top;
+        infoBox.innerHTML = `<strong>${spot.name}</strong><p>${spot.description}</p><img src="${spot.imageUrl}" alt="${spot.name}" style="width: 100%;">`;
+      };
+    });
+  }
+
+  placeMarkers();
+  window.addEventListener('resize', placeMarkers);
+};
+</script>
+</body>
+</html>
