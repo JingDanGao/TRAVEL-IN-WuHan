@@ -180,46 +180,30 @@ body {
      padding: 300px; /* 添加一些左右内边距 */
     /* align-items: center;*/
     }
-      #destinations {
-    margin: 0 auto; /* 居中对齐 */
-    padding: 50px 0; /* 调整上下内边距为50px，左右内边距为0 */
-    /* align-items: center; */ /* 此属性不适用于flex容器，因此被注释掉 */
-}
+      
+     #destinations ul {
+     /* 使用max-width提供响应式宽度，width设置为100%以自适应父容器 */
+     max-width: 1800px; /* 如果需要，可以调整此值 */
+     width: 100%;
+     list-style: none;
+     padding: 0;
+     margin: 0 auto; /* 居中对齐ul元素 */
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center; /* 水平居中对齐 */
+     }
 
-#destinations ul {
-    /* 删除了固定宽度设置，用max-width替代以保持响应性 */
-    max-width: 1200px; /* 根据实际情况调整最大宽度 */
-    width: 100%;
-    list-style: none;
-    padding: 0;
-    margin: 0 auto; /* 居中对齐ul元素 */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* 水平居中对齐 */
-    gap: 10px; /* 使用gap代替li的margin，为元素之间提供空间 */
-}
-
-#destinations ul li {
-    /* 移除了margin，使用了gap属性来提供间距 */
-    width: calc((100% - 30px) / 4); /* 减去gap后，平均每个元素宽度 */
-    height: auto; /* 高度根据内容自适应 */
+    #destinations ul li {
+     /* 移除float属性，由于flexbox已经处理了布局 */
+     margin: 5px; /* 按需调整间距 */
+    width: 300px; /* 或者使用flex属性来设置基础大小和成长因子 */
+    height: 220px;
     position: relative;
     overflow: hidden;
     background-color: #7f7f7f;
-    flex-grow: 1; /* 允许元素根据容器大小伸缩 */
-}
-
-#destinations ul li.first {
-    width: calc((100% - 30px) / 2); /* 第一个元素占用两列 */
-}
-
-#destinations ul li img {
-    width: 100%;
-    height: auto;
-    position: relative;
-}
-
-/* 其他样式保持不变 */
+    }
+    #destinations ul li.first {width:600px; }
+    #destinations ul li img{width:100%;height:auto;position: relative;}
     #destinations ul li a span{display:block; position:absolute; bottom:0px; width:100%; height:47px; background:url(mask.png) repeat-x}
     #destinations ul li a:hover span{height:230px; filter:alpha(opacity=50); -moz-opacity:0.5; opacity:0.5; background:#000;}
     #destinations ul li em{position:absolute; bottom:8px; margin-left:10px; width:100%; height:auto; font-size:18px; font-style:normal; line-height:21px; color:#fff; text-shadow: 2px 2px 2px #000;}
