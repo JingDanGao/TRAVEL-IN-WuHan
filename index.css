@@ -196,13 +196,13 @@ body {
     #destinations ul li {
      /* 移除float属性，由于flexbox已经处理了布局 */
      margin: 5px; /* 按需调整间距 */
-    width: 200px; /* 或者使用flex属性来设置基础大小和成长因子 */
-    height: 200px;
+    width: 300px; /* 或者使用flex属性来设置基础大小和成长因子 */
+    height: auto;
     position: relative;
     overflow: hidden;
     background-color: #7f7f7f;
     }
-    #destinations ul li.first {width:400px; }
+    #destinations ul li.first {width:600px; }
     #destinations ul li img{width:100%;height:auto;position: relative;}
     #destinations ul li a span{display:block; position:absolute; bottom:0px; width:100%; height:47px; background:url(mask.png) repeat-x}
     #destinations ul li a:hover span{height:230px; filter:alpha(opacity=50); -moz-opacity:0.5; opacity:0.5; background:#000;}
